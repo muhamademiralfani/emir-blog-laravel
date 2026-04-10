@@ -2,7 +2,12 @@
 nixPkgs = ["php84", "php84Packages.composer", "nodejs"]
 
 [phases.build]
-cmds = ["composer install --no-dev --optimize-autoloader"]
+# Kita tambahkan instalasi node modules dan build vite di sini
+cmds = [
+    "composer install --no-dev --optimize-autoloader",
+    "npm install",
+    "npm run build"
+]
 
 [phases.prestart]
 cmds = [
