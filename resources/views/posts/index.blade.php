@@ -19,17 +19,16 @@
                 <p class="text-gray-500 text-sm">Tempat berbagi cerita dan inspirasi.</p>
             </div>
 
+
             <nav class="flex items-center gap-6">
                 @auth
                 <div class="flex items-center gap-4">
                     <a href="{{ route('dashboard') }}" class="text-sm font-medium text-gray-600 hover:text-blue-600 transition">
                         Dashboard
                     </a>
-
                     <a href="/posts/create" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm font-bold transition">
                         + Tulis
                     </a>
-
                     <form method="POST" action="{{ route('logout') }}" class="inline">
                         @csrf
                         <button type="submit" class="text-sm text-red-500 hover:text-red-700 font-medium underline ml-2">
@@ -38,6 +37,10 @@
                     </form>
                 </div>
                 @else
+                <div class="flex gap-4">
+                    <a href="{{ route('login') }}" class="text-gray-600 hover:text-blue-600 font-medium text-sm">Login</a>
+                    <a href="{{ route('register') }}" class="bg-gray-800 text-white px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-900 transition">Daftar</a>
+                </div>
                 @endauth
             </nav>
 
