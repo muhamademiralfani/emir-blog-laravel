@@ -1,2 +1,7 @@
 [variables]
 PHP_VERSION = '8.4'
+[phases.setup]
+nixPkgs = ["...", "php"] # biarkan yang sudah ada
+
+[start]
+cmd = "bash railway.sh"
