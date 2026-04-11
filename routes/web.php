@@ -88,6 +88,21 @@ require __DIR__ . '/auth.php';
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
 
+Route::get('/debug-db', function () {
+    $dbPath = config('database.connections.sqlite.database');
+    $exists = file_exists($dbPath);
+    $allUsers = \App\Models\User::all();
+
+    return [
+        'database_path' => $dbPath,
+        'file_exists' => $exists,
+        'environment' => app()->environment(),
+        'total_users' => $allUsers->count(),
+        'users_data' => $allUsers,
+        'db_connection' => config('database.default'),
+    ];
+});
+
 
 
 Route::get('/category/{category:slug}', function (Category $category) {
