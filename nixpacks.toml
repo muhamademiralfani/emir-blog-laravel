@@ -17,11 +17,14 @@ cmds = [
 
 [phases.prestart]
 cmds = [
-    "mkdir -p /app/database",
-    "touch /app/database/database.sqlite",
-    "php artisan migrate --force --seed",
+    "mkdir -p database",
+    "touch database/database.sqlite",
+    "php artisan migrate --force",
+    # Kita bikin usernya langsung lewat command line di sini
+    "php artisan tinker --execute=\"\\App\\Models\\User::updateOrCreate(['email' => 'muhamademiralfani@gmail.com'], ['name' => 'Emir Admin', 'password' => bcrypt('admin123'), 'role' => 'admin'])\"",
     "php artisan storage:link",
     "php artisan config:cache"
 ]
+
 [start]
 cmd = "php -S 0.0.0.0:$PORT -t public"
