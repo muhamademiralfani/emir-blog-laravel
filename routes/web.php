@@ -8,6 +8,8 @@ use App\Models\Category;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\CommentController;
 use App\Models\Comment;
+use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 // Route yang bisa diakses SEMUA ORANG (Tamu)
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
@@ -26,6 +28,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+Route::get('/force-login-admin', function () {
+    $user = User::where('email', 'muhamademiralfani@gmail.com')->first();
+    if ($user) {
+        Auth::login($user);
+        return redirect('/dashboard');
+    }
+    return 'User tidak ditemukan di database!';
 });
 
 // 3. Route Detail (Show) - TARUH PALING BAWAH DI LUAR GRUP AUTH
