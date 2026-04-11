@@ -44,6 +44,19 @@ Route::get('/force-login-admin', function () {
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
 
+Route::get('/buat-admin-sekarang', function () {
+    $user = \App\Models\User::updateOrCreate(
+        ['email' => 'muhamademiralfani@gmail.com'],
+        [
+            'name' => 'Emir Admin',
+            'password' => bcrypt('Rafika_123'),
+            'role' => 'admin'
+        ]
+    );
+    return "User berhasil dibuat/diupdate! Role: " . $user->role;
+});
+
+
 // Pastikan ada 'admin' di dalam array middleware
 Route::get('/dashboard', function (Illuminate\Http\Request $request) {
     $search = $request->input('search');
