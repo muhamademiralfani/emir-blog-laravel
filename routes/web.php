@@ -30,31 +30,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/force-login-admin', function () {
-    $user = User::where('email', 'muhamademiralfani@gmail.com')->first();
-    if ($user) {
-        Auth::login($user);
-        return redirect('/dashboard');
-    }
-    return 'User tidak ditemukan di database!';
-});
 
 // 3. Route Detail (Show) - TARUH PALING BAWAH DI LUAR GRUP AUTH
 // Gunakan {post:slug} agar Laravel tahu ini untuk pencarian berdasarkan slug
 Route::get('/posts/{post:slug}', [PostController::class, 'show']);
 
-
-Route::get('/buat-admin-sekarang', function () {
-    $user = \App\Models\User::updateOrCreate(
-        ['email' => 'muhamademiralfani@gmail.com'],
-        [
-            'name' => 'Emir Admin',
-            'password' => bcrypt('Rafika_123'),
-            'role' => 'admin'
-        ]
-    );
-    return "User berhasil dibuat/diupdate! Role: " . $user->role;
-});
 
 
 // Pastikan ada 'admin' di dalam array middleware
@@ -100,21 +80,6 @@ require __DIR__ . '/auth.php';
 
 Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
 
-
-Route::get('/debug-db', function () {
-    $dbPath = config('database.connections.sqlite.database');
-    $exists = file_exists($dbPath);
-    $allUsers = \App\Models\User::all();
-
-    return [
-        'database_path' => $dbPath,
-        'file_exists' => $exists,
-        'environment' => app()->environment(),
-        'total_users' => $allUsers->count(),
-        'users_data' => $allUsers,
-        'db_connection' => config('database.default'),
-    ];
-});
 
 
 
