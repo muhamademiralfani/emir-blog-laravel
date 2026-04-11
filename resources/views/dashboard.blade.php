@@ -34,30 +34,43 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center gap-4">
-                    <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
-                        </svg>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 flex items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="text-sm font-medium text-gray-500">Total Kategori</p>
+                            <h3 class="text-2xl font-bold text-gray-800">{{ $stats['total_categories'] }}</h3>
+                        </div>
                     </div>
-                    <div>
-                        <p class="text-sm font-medium text-gray-500">Total Kategori</p>
-                        <h3 class="text-2xl font-bold text-gray-800">{{ $stats['total_categories'] }}</h3>
-                    </div>
+                    <a href="{{ route('categories.index') }}" class="text-xs bg-purple-50 text-purple-600 px-3 py-1 rounded-full font-bold hover:bg-purple-600 hover:text-white transition-all">
+                        Kelola
+                    </a>
                 </div>
             </div>
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
 
-                <div class="flex justify-between items-center mb-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
                     <h1 class="text-2xl font-bold text-gray-800">Daftar Artikel</h1>
-                    <a href="/posts/create" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 py-2 rounded-lg font-semibold transition">
-                        + Tambah Postingan Baru
-                    </a>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="{{ route('categories.index') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold text-sm transition">
+                            📁 Kategori
+                        </a>
+                        <a href="{{ route('tags.index') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-semibold text-sm transition">
+                            🏷️ Tags
+                        </a>
+                        <a href="/posts/create" class="bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-semibold text-sm transition">
+                            + Tambah Postingan
+                        </a>
+                    </div>
                 </div>
 
                 <div class="overflow-x-auto">
                     <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                        <h2 class="text-xl font-bold text-gray-800">Daftar Artikel</h2>
+                        <h2 class="text-xl font-bold text-gray-800"></h2>
 
                         <form action="{{ route('dashboard') }}" method="GET" class="relative w-full md:w-80">
                             <input

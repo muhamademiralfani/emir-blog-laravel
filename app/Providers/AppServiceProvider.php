@@ -23,12 +23,12 @@ class AppServiceProvider extends ServiceProvider
      */
 
     public function boot(): void
-{
-    Paginator::useTailwind();
+    {
+        Paginator::useTailwind();
 
-    // Paksa HTTPS jika APP_ENV di set ke 'production' (seperti di Railway)
-    if (Config::get('app.env') === 'production') {
-        URL::forceScheme('https');
+        // Paksa HTTPS jika APP_ENV di set ke 'production' (seperti di Railway)
+        if (Config::get('app.env') === 'production') {
+            URL::forceScheme('https');
+        }
     }
-}
 }

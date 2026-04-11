@@ -5,7 +5,7 @@ use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Post;
 use App\Models\Category;
-
+use App\Http\Controllers\TagController;
 use App\Http\Controllers\CommentController;
 use App\Models\Comment;
 
@@ -47,7 +47,7 @@ Route::get('/dashboard', function (Illuminate\Http\Request $request) {
         })
         ->latest()
         ->get();
-        
+
     // Hitung statistik
     $stats = [
         'total_posts' => Post::count(),
@@ -57,6 +57,18 @@ Route::get('/dashboard', function (Illuminate\Http\Request $request) {
 
     return view('dashboard', compact('posts', 'stats'));
 })->middleware(['auth', 'admin'])->name('dashboard');
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    // Route CRUD Kategori
+    Route::get('/dashboard/categories', [App\Http\Controllers\CategoryController::class, 'index'])->name('categories.index');
+    Route::post('/dashboard/categories', [App\Http\Controllers\CategoryController::class, 'store'])->name('categories.store');
+    Route::delete('/dashboard/categories/{category}', [App\Http\Controllers\CategoryController::class, 'destroy'])->name('categories.destroy');
+    Route::get('/dashboard/tags', [TagController::class, 'index'])->name('tags.index');
+    Route::post('/dashboard/tags', [TagController::class, 'store'])->name('tags.store');
+    Route::delete('/dashboard/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
+});
+
+
 
 // Route bawaan Breeze (Login/Register)
 require __DIR__ . '/auth.php';

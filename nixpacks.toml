@@ -1,29 +1,29 @@
 [phases.setup]
-nixPkgs = ["php84", "php84Packages.composer", "nodejs"]
+nixPkgs = ["php84", "php84Packages.composer", "nodejs_20"]
 
 [phases.install]
-# Instalasi dependencies PHP & Node
 cmds = [
     "composer install --no-dev --optimize-autoloader",
-    "npm install"
+    "npm ci"
 ]
 
+# Di bagian prestart cmds
+"php artisan migrate --force --seed --seeder=CategoryTagSeeder"
+
 [phases.build]
-# Proses kompilasi aset Vite
 cmds = [
     "npm run build"
 ]
 
 [phases.prestart]
-# Persiapan database dan sistem Laravel
 cmds = [
     "mkdir -p database",
     "touch database/database.sqlite",
     "php artisan migrate --force",
     "php artisan storage:link",
-    "php artisan config:cache",
-    "php artisan route:cache",
-    "php artisan view:cache"
+    "php artisan config:clear",
+    "php artisan route:clear",
+    "php artisan view:clear"
 ]
 
 [start]
