@@ -26,9 +26,9 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useTailwind();
 
-        // Paksa HTTPS jika APP_ENV di set ke 'production' (seperti di Railway)
-        if (Config::get('app.env') === 'production') {
-            URL::forceScheme('https');
-        }
+    
+        if (app()->environment('production')) {
+        URL::forceScheme('https');
+    }
     }
 }
