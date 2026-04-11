@@ -19,9 +19,7 @@ cmds = [
 cmds = [
     "mkdir -p database",
     "touch database/database.sqlite",
-    "php artisan migrate --force",
-    # Baris sakti: bikin user lewat command line (pake kutip satu yang bener)
-    "php artisan tinker --execute=\"\\App\\Models\\User::updateOrCreate(['email' => 'muhamademiralfani@gmail.com'], ['name' => 'Emir Admin', 'password' => bcrypt('admin123'), 'role' => 'admin'])\"",
+    "php artisan migrate --force --seed", # Tambahkan --seed di sini
     "php artisan storage:link",
     "php artisan config:cache"
 ]
